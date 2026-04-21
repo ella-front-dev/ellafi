@@ -51,17 +51,15 @@ export function WalletAddressCard({ address }: WalletAddressCardProps) {
             {copied ? "Copied!" : "Copy Address"}
           </Button>
 
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 border border-border text-muted hover:text-text hover:bg-surface-2 gap-1.5 text-xs"
-            asChild
+          <a
+            href={basescanUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-border text-muted hover:text-text hover:bg-surface-2 text-xs transition-colors"
           >
-            <a href={basescanUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-3.5 w-3.5" />
-              Basescan
-            </a>
-          </Button>
+            <ExternalLink className="h-3.5 w-3.5" />
+            Basescan
+          </a>
         </div>
 
         <p className="text-muted text-xs">
