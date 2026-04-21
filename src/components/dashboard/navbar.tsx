@@ -1,22 +1,54 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Wallet } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "@/components/ui/button";
+
+const NAV_LINKS = [
+  { href: "/", label: "Dashboard" },
+  { href: "/wallet", label: "Wallet" },
+  { href: "/trade", label: "Trade" },
+  { href: "/swap", label: "Swap" },
+];
 
 function truncateAddress(address: string) {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
 export function Navbar() {
+  const pathname = usePathname();
+
   return (
     <header className="h-12 border-b border-border bg-surface">
       <div className="max-w-screen-xl mx-auto px-4 h-full flex items-center justify-between">
-        {/* Logo */}
-        <span className="font-mono text-neutral tracking-widest text-sm">
-          TERMINAL
-        </span>
+        {/* Logo + Nav */}
+        <div className="flex items-center gap-6">
+          <span className="font-mono text-neutral tracking-widest text-sm">
+            TERMINAL
+          </span>
+          <nav className="hidden sm:flex items-center gap-1">
+            {NAV_LINKS.map(({ href, label }) => {
+              const isActive = pathname === href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={[
+                    "px-3 py-1 rounded text-xs font-medium transition-colors",
+                    isActive
+                      ? "text-accent bg-accent-bg"
+                      : "text-muted hover:text-text",
+                  ].join(" ")}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
 
         {/* Right side */}
         <div className="flex items-center gap-2">
