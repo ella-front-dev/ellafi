@@ -16,7 +16,7 @@ async function fetchTokenPrices(ids: string[]): Promise<PriceMap> {
 }
 
 export function useTokenPrices() {
-  const ids = BASE_TOKENS.map((t) => t.coingeckoId);
+  const ids = ["ethereum", ...BASE_TOKENS.map((t) => t.coingeckoId)];
 
   const { data: prices, isLoading, isError } = useQuery({
     queryKey: ["token-prices", ids],
